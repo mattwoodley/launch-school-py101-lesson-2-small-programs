@@ -1,0 +1,90 @@
+1. A function that returns the sum of two numbers 
+
+START
+
+# Given 2 numbers in arguments called "num1" and "num2"
+
+return the result of num1 + num2
+
+END
+
+
+
+2. A function that takes a list of strings, and returns a string that is all of those strings concatenated together
+
+START
+
+# Given a list of strings as an argument called "strings"
+
+SET result = ""
+
+result.join(strings)
+
+return result
+
+END
+
+
+
+3. A function that takes a list of integers, and returns a new list with every other element from the original list, starting with the first element.
+For instance: every_other([1,4,7,2,5]) # => [1,7,5]
+
+START
+
+# Given a list of integers as an argument called "numbers"
+
+SET every_other = []
+SET iterator = 1
+
+WHILE iterator <= length of numbers
+    append the value within numbers list at index iterator to every_other
+    iterator = iterator + 2
+
+return every_other
+
+END
+
+
+
+4. A function that determines the index of the 3rd occurrence of a given character in a string. For instance, if the given character is 'x' and the string is 'axbxcdxex', the function should return 6 (the index of the 3rd 'x'). If the given character does not occur at least 3 times, return None. 
+
+START
+
+# Given a string as an argument called "string"
+# Given a character as an argument called "target_character"
+
+SET occurrence = 0
+
+FOR character and index IN string
+    IF occurrence is equal to 3
+        return index - 1
+    ELSE
+        IF target_character's value is equal to character
+            occurrence = occurrence + 1
+        ELSE
+            skip to the next iteration
+
+IF occurrence < 3
+    return None
+
+END
+
+
+
+5. A function that takes two lists of numbers and returns the result of merging the lists. The elements of the first list should become the elements at the even indexes of the returned list, while the elements of the second list should become the elements at the odd indexes. For instance: 
+
+# Given a list of numbers called "numbers1"
+# Given a list of numbers called "numbers2"
+# Given the knowledge that the lists of numbers are equal in length
+
+SET iterator = 1
+SET merged_numbers = []
+
+WHILE iterator <= length of numbers1
+    append value within numbers1 at space iterator
+    append value within numbers2 at space iterator
+    iterator = iterator + 1
+
+return merged_numbers
+
+merge([1, 2, 3], [4, 5, 6]) # => [1, 4, 2, 5, 3, 6]
