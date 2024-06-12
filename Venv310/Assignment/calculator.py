@@ -48,7 +48,9 @@ while True:
     print()
 
     prompt('Would you like to run another calculation? Yes or no?')
-    if input().lower() != 'yes':
+    answer = input()
+
+    if answer and answer[0].lower() != 'y':
         break
 
     print()
