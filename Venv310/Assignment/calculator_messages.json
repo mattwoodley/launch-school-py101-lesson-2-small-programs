@@ -8,7 +8,8 @@
         "operation": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
         "result": "The result is",
         "run_again?": "Would you like to run another calculation? Yes or no?",
-        "answer": "y"
+        "answer": "y",
+        "error_divide_by_zero": "Error: Division by zero is not allowed."
     },
     "es": {
         "welcome": "Bienvenido a la calculadora!",
@@ -19,7 +20,8 @@
         "operation": "¿Qué operación te gustaría realizar?\n1) Sumar 2) Restar 3) Multiplicar 4) Dividir",
         "result": "El resultado es",
         "run_again?": "¿Te gustaría realizar otro cálculo? ¿Sí o no?",
-        "answer": "s"
+        "answer": "s",
+        "error_divide_by_zero": "Error: No se permite la división por cero."
     },
     "fr": {
         "welcome": "Bienvenue à la calculatrice !",
@@ -30,6 +32,7 @@
         "operation": "Quelle opération souhaitez-vous effectuer ?\n1) Ajouter 2) Soustraire 3) Multiplier 4) Diviser",
         "result": "Le résultat est",
         "run_again?": "Voulez-vous effectuer un autre calcul ? Oui ou non ?",
-        "answer": "o"
+        "answer": "o",
+        "error_divide_by_zero": "Erreur : La division par zéro n'est pas autorisée."
     }
 }

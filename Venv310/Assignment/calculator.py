@@ -13,7 +13,7 @@ def prompt(key):
 
 def invalid_number(number_str):
     try:
-        int(number_str)
+        float(number_str)
     except ValueError:
         return True
 
@@ -46,15 +46,21 @@ while True:
 
     match operation:
         case '1':
-            output = int(number_1) + int(number_2)
+            output = float(number_1) + float(number_2)
         case '2':
-            output = int(number_1) - int(number_2)
+            output = float(number_1) - float(number_2)
         case '3':
-            output = int(number_1) * int(number_2)
+            output = float(number_1) * float(number_2)
         case '4':
-            output = int(number_1) / int(number_2)
+            if float(number_2) == 0:
+                output = messages('error_divide_by_zero', LANGUAGE)
+            else:
+                output = float(number_1) / float(number_2)
 
-    prompt(f"{messages('result', LANGUAGE)} {output}")
+    if isinstance(output, str):
+        prompt(output)
+    else:
+        prompt(f"{messages('result', LANGUAGE)} {output}")
     print()
 
     prompt(messages('run_again?', LANGUAGE))
