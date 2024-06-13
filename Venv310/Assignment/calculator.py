@@ -1,10 +1,15 @@
 import json
 
-with open("calculator_messages.json", encoding="utf-8") as file:
-    messages = json.load(file)
+with open('calculator_messages.json', encoding='utf-8') as file:
+    MESSAGES = json.load(file)
 
-def prompt(message):
-    print(f"==> {message}")
+LANGUAGE = 'en'
+
+def messages(key, lang='en'):
+    return MESSAGES[lang][key]
+
+def prompt(key):
+    print(f'==> {key}')
 
 def invalid_number(number_str):
     try:
@@ -16,46 +21,46 @@ def invalid_number(number_str):
 
 while True:
 
-    prompt(messages['welcome'])
+    prompt(messages('welcome', LANGUAGE))
 
-    prompt("What's the first number?")
-    number1 = input()
+    prompt(messages('number_1', LANGUAGE))
+    number_1 = input()
 
-    while invalid_number(number1):
-        prompt(messages["invalid_number"])
-        number1 = input()
+    while invalid_number(number_1):
+        prompt(messages('invalid_number', LANGUAGE))
+        number_1 = input()
 
-    prompt("What's the second number?")
-    number2 = input()
+    prompt(messages('number_2', LANGUAGE))
+    number_2 = input()
 
-    while invalid_number(number2):
-        prompt(messages["invalid_number"])
-        number2 = input()
+    while invalid_number(number_2):
+        prompt(messages('invalid_number', LANGUAGE))
+        number_2 = input()
 
-    prompt("What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide")
+    prompt(messages('operation', LANGUAGE))
     operation = input()
 
-    while operation not in ["1", "2", "3", "4"]:
-        prompt("You must choose 1, 2, 3, or 4")
+    while operation not in ['1', '2', '3', '4']:
+        prompt(messages('invalid_operation', LANGUAGE))
         operation = input()
 
     match operation:
-        case "1":
-            output = int(number1) + int(number2)
-        case "2":
-            output = int(number1) - int(number2)
-        case "3":
-            output = int(number1) * int(number2)
-        case "4":
-            output = int(number1) / int(number2)
+        case '1':
+            output = int(number_1) + int(number_2)
+        case '2':
+            output = int(number_1) - int(number_2)
+        case '3':
+            output = int(number_1) * int(number_2)
+        case '4':
+            output = int(number_1) / int(number_2)
 
-    prompt(f"The result is {output}")
+    prompt(f"{messages('result', LANGUAGE)} {output}")
     print()
 
-    prompt('Would you like to run another calculation? Yes or no?')
+    prompt(messages('run_again?', LANGUAGE))
     answer = input()
 
-    if answer and answer[0].lower() != 'y':
+    if answer and answer[0].lower() != messages('answer', LANGUAGE):
         break
 
     print()
