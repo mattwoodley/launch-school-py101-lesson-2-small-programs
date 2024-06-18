@@ -5,6 +5,8 @@ This script allows users to calculate monthly mortgage payments based on
 user-provided loan amount, annual percentage rate (APR), and loan term in months.
 """
 
+import math
+
 def prompt(display_message):
     """
     Prints a user message with a prefix.
@@ -44,17 +46,26 @@ def invalid_input(user_input, type_constructor, allow_zero=False):
     """
     try:
         value = type_constructor(user_input)
-        if not allow_zero and value == 0:
-            print('Error: Zero is not allowed.')
-            return True
-
-        if value < 0:
-            print('Error: Negative numbers are not allowed.')
-            return True
     except ValueError:
-        return True  # Return True if input is invalid or negative
+        return True
 
-    return False  # Return False if input is valid and non-negative
+    if not allow_zero and value == 0:
+        print('Error: Zero is not allowed.')
+        return True
+
+    if math.isinf(value):
+        print('Error: Infinite is not allowed.')
+        return True
+
+    if math.isnan(value):
+        print('Error: NaN is not allowed.')
+        return True
+
+    if value < 0:
+        print('Error: Negative numbers are not allowed.')
+        return True
+
+    return False
 
 
 def calculate_monthly_payment(loan_amount, annual_interest_rate_percentage, loan_term_months):
