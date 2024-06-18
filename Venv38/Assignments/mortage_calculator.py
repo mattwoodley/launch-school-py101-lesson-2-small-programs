@@ -147,7 +147,7 @@ def main():
     run_again = get_user_input(
         'Would you like to run another calculation? Yes or no? ')
 
-    if run_again and run_again.lower()[0] == 'y':
+    if run_again and run_again.lower() == 'yes':
         main()
 
 
