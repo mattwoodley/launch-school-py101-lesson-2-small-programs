@@ -1,0 +1,13 @@
+{
+    "welcome": "Welcome to Mortgage Calculator!",
+    "error_nan": "Error: NaN is not allowed.",
+    "error_zero": "Error: Zero is not allowed.",
+    "error_invalid": "Error: Invalid input. Please try again.\n...",
+    "error_infinite": "Error: Infinite is not allowed.",
+    "error_negative": "Error: Negative numbers are not allowed.",
+    "monthly_payment": "Your monthly payment is: ${payment_amount:.2f}\n...",
+    "get_loan_amount": "Please enter the total amount on your loan (example: 2050.38 = $2050.38):",
+    "get_apr": "Please enter the Annual Percentage Rate (APR) (example: 5 = 5%):",
+    "get_loan_months": "Please enter the total length of the loan in months (example: 26 = 2 years and 2 months):",
+    "get_continue_calculation": "Would you like to run another calculation? Yes or no?"
+}
