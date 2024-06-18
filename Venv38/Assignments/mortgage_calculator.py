@@ -5,9 +5,13 @@ This script allows users to calculate monthly mortgage payments based on
 user-provided loan amount, annual percentage rate (APR),
 and loan term in months.
 """
-
-import math
 import os
+import math
+import json
+
+with open('mortgage_calculator_messages.json', encoding="utf-8") as file:
+    MESSAGES = json.load(file)
+
 
 def prompt(display_message):
     """
@@ -33,6 +37,67 @@ def get_user_input(prompt_message):
     return input()
 
 
+def get_loan_amount():
+    """
+    Prompts the user to input the total loan amount
+    and validates the input.
+
+    The function repeatedly prompts the user until a valid,
+    positive float is entered.
+
+    Returns:
+        float: The valid loan amount entered by the user.
+    """
+    loan_amount = get_user_input(
+        MESSAGES['get_loan_amount'])
+
+    while invalid_input(loan_amount, float):
+        print(MESSAGES['error_invalid'])
+        loan_amount = get_user_input(MESSAGES['get_loan_amount'])
+
+    return loan_amount
+
+
+def get_apr():
+    """
+    Prompts the user to input the Annual Percentage Rate (APR)
+    and validates the input.
+
+    The function repeatedly prompts the user until a valid,
+    non-negative float is entered.
+
+    Returns:
+        float: The valid annual percentage rate entered by the user.
+    """
+    apr = get_user_input(MESSAGES['get_apr'])
+
+    while invalid_input(apr, float, True):
+        print(MESSAGES['error_invalid'])
+        apr = get_user_input(MESSAGES['get_apr'])
+
+    return apr
+
+
+def get_loan_months():
+    """
+    Prompts the user to input the total loan term in months
+    and validates the input.
+
+    The function repeatedly prompts the user until a valid,
+    positive integer is entered.
+
+    Returns:
+        int: The valid loan term in months entered by the user.
+    """
+    loan_term_months = get_user_input(MESSAGES['get_loan_months'])
+
+    while invalid_input(loan_term_months, int):
+        print(MESSAGES['error_invalid'])
+        loan_term_months = get_user_input(MESSAGES['get_loan_months'])
+
+    return loan_term_months
+
+
 def invalid_input(user_input, type_constructor, allow_zero=False):
     """
     Validates user input, checking if it can be converted to a specified type
@@ -54,26 +119,26 @@ def invalid_input(user_input, type_constructor, allow_zero=False):
         return True
 
     if not allow_zero and value == 0:
-        print('Error: Zero is not allowed.')
+        print(MESSAGES['error_zero'])
         return True
 
     if math.isinf(value):
-        print('Error: Infinite is not allowed.')
+        print(MESSAGES['error_infinite'])
         return True
 
     if math.isnan(value):
-        print('Error: NaN is not allowed.')
+        print(MESSAGES['error_nan'])
         return True
 
     if value < 0:
-        print('Error: Negative numbers are not allowed.')
+        print(MESSAGES['error_negative'])
         return True
 
     return False
 
 
 def calculate_monthly_payment(loan_amount,
-                              annual_interest_rate_percentage,
+                              apr,
                               loan_term_months):
     """
     Calculates the monthly payment for a loan given the loan amount,
@@ -81,14 +146,14 @@ def calculate_monthly_payment(loan_amount,
 
     Args:
         loan_amount (float): The total amount of the loan.
-        annual_interest_rate_percentage (float): The annual 
+        apr (float): The annual 
         interest rate as a percentage (e.g., 5 for 5%).
         loan_term_months (int): The length of the loan term in months.
 
     Returns:
         float: The monthly payment amount.
     """
-    annual_interest_rate = float(annual_interest_rate_percentage) / 100
+    annual_interest_rate = float(apr) / 100
     monthly_interest_rate = annual_interest_rate / 12
 
     if monthly_interest_rate == 0:
@@ -107,79 +172,7 @@ def print_monthly_payment(payment_amount):
     Args:
         payment_amount (float): The amount of the monthly payment.
     """
-    prompt(f'Your monthly payment is: ${payment_amount:.2f}\n...')
-
-
-def get_loan_amount():
-    """
-    Prompts the user to input the total loan amount
-    and validates the input.
-
-    The function repeatedly prompts the user until a valid,
-    positive float is entered.
-
-    Returns:
-        float: The valid loan amount entered by the user.
-    """
-    loan_amount = get_user_input(
-        'Please enter the total amount on your loan ' +
-        '(example: 2050.38 = $2050.38): ')
-
-    while invalid_input(loan_amount, float):
-        print('Error: Invalid input. Please try again.\n...')
-        loan_amount = get_user_input(
-            'Please enter the total amount on your loan ' +
-            '(example: 2050.38 = $2050.38): ')
-
-    return loan_amount
-
-
-def get_apr():
-    """
-    Prompts the user to input the Annual Percentage Rate (APR)
-    and validates the input.
-
-    The function repeatedly prompts the user until a valid,
-    non-negative float is entered.
-
-    Returns:
-        float: The valid annual percentage rate entered by the user.
-    """
-    annual_percentage_rate = get_user_input(
-        'Please enter the Annual Percentage Rate (APR) ' +
-        '(example: 5 = 5%): ')
-
-    while invalid_input(annual_percentage_rate, float, True):
-        print('Error: Invalid input. Please try again.\n...')
-        annual_percentage_rate = get_user_input(
-            'Please enter the Annual Percentage Rate (APR) ' +
-            '(example: 5 = 5%): ')
-
-    return annual_percentage_rate
-
-
-def get_loan_months():
-    """
-    Prompts the user to input the total loan term in months
-    and validates the input.
-
-    The function repeatedly prompts the user until a valid,
-    positive integer is entered.
-
-    Returns:
-        int: The valid loan term in months entered by the user.
-    """
-    loan_term_months = get_user_input(
-        'Please enter the total length of the loan in months ' +
-        '(example: 26 = 2 years and 2 months): ')
-
-    while invalid_input(loan_term_months, int):
-        print('Error: Invalid input. Please try again.\n...')
-        loan_term_months = get_user_input(
-            'Please enter the total length of the loan in months' +
-            '(example: 26 = 2 years and 2 months): ')
-
-    return loan_term_months
+    prompt(MESSAGES['monthly_payment'].format(payment_amount=payment_amount))
 
 
 def continue_calculating():
@@ -189,9 +182,8 @@ def continue_calculating():
     Returns:
         bool: True if the user wants to continue, False otherwise.
     """
-    response = get_user_input(
-        'Would you like to run another calculation? Yes or no? ')
-    return response.lower() == 'yes'
+    continue_calculation = get_user_input(MESSAGES['get_continue_calculation'])
+    return continue_calculation.lower() == 'yes'
 
 
 def clear_screen():
@@ -222,11 +214,11 @@ def main():
     """
 
     loan_amount = get_loan_amount()
-    annual_percentage_rate = get_apr()
+    apr = get_apr()
     loan_term_months = get_loan_months()
 
     monthly_payment = calculate_monthly_payment(loan_amount,
-                                                annual_percentage_rate,
+                                                apr,
                                                 loan_term_months)
 
     print_monthly_payment(monthly_payment)
@@ -236,5 +228,5 @@ def main():
         main()
 
 
-prompt('Welcome to Mortgage Calculator!')
+prompt(MESSAGES['welcome'])
 main()
