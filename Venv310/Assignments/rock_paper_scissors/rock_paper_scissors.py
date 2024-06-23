@@ -1,8 +1,9 @@
 """
-Rock, Paper, Scissors Game
+Rock, Paper, Scissors, Lizard, Spock Game
 
-User will play against the Computer in a game of rock, paper, scissors.
-This script will take in input from the user, and then the computer will
+User will play against the Computer in a game of
+rock, paper, scissors, lizard, spock.
+This script will take input from the user, and then the computer will
 select a response at random. The 2 values will then be compared, and depending
 on the result, either user or computer will be declared the winner or in the
 event of a draw the script will start again.
@@ -36,7 +37,8 @@ def prompt(display_message):
 
 def invalid_choice(choice):
     """
-    Checks if the user's choice is valid (rock, paper, or scissors).
+    Checks if the user's choice is valid
+    (rock, paper, scissors, lizard, or spock).
 
     Args:
         choice (str): The user's choice.
@@ -52,7 +54,7 @@ def invalid_choice(choice):
 
 def get_user_choice():
     """
-    Prompts the user to choose rock, paper, or scissors.
+    Prompts the user to choose rock, paper, scissors, lizard, or spock.
 
     Returns:
         str: The user's valid choice.
@@ -71,13 +73,13 @@ def get_user_choice():
 
 def get_computer_choice():
     """
-    Randomly selects rock, paper, or scissors for the computer.
+    Randomly selects rock, paper, scissors, lizard, or spock for the computer.
 
     The choice is made from the VALID_CHOICES list.
 
     Returns:
         str: The computer's choice, which will be one of
-        'rock', 'paper', or 'scissors'.
+        'rock', 'paper', 'scissors', 'lizard', or 'spock'.
     """
     return random.choice(VALID_CHOICES)
 
@@ -110,6 +112,8 @@ def display_result(result, user_choice, computer_choice):
 
     Args:
         result (str): The result of the game ('draw', 'win', or 'loss').
+        user_choice (str): The user's choice.
+        computer_choice (str): The computer's choice.
     """
     match result:
         case 'draw':
@@ -130,7 +134,8 @@ def display_box(key, user_choice, computer_choice):
 
     Args:
         key (str): The key to retrieve the message from the MESSAGES dictionary
-        **kwargs: Additional keyword arguments for string formatting.
+        user_choice (str): The user's choice.
+        computer_choice (str): The computer's choice.
     """
     message = MESSAGES[key].format(user_choice=user_choice,
                                    computer_choice=computer_choice)
@@ -168,7 +173,7 @@ def clear_screen():
 
 def main():
     """
-    Main function that runs the rock, paper, scissors game.
+    Main function that runs the rock, paper, scissors, lizard, spock game.
     Prompts the user for input, gets the computer's choice,
     determines the winner, displays the result,
     and prompts the user to continue or quit.
@@ -193,5 +198,3 @@ def main():
 
 prompt(MESSAGES['welcome'])
 main()
-
-# Change win draw and losses to display within a box to separate from prompts
