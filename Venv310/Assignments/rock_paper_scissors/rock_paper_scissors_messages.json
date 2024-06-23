@@ -1,5 +1,5 @@
 {
-    "welcome": "Let's play Rock Paper Scissors!",
+    "welcome": "Let's play Rock Paper Scissors Lizard Spock!",
     "error_invalid": "Error: Invalid input. Please try again.",
     "choose_rps": "Choose one: {choices}",
     "user_choice": "You chose: {user_choice}",

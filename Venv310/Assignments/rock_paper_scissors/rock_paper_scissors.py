@@ -14,11 +14,13 @@ import random
 
 with open('rock_paper_scissors_messages.json', encoding="utf-8") as file:
     MESSAGES = json.load(file)
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
 WINNING_CONDITIONS = {
-    'rock': 'scissors',
-    'paper': 'rock',
-    'scissors': 'paper'
+    'rock': ['scissors', 'lizard'],
+    'paper': ['rock', 'spock'],
+    'scissors': ['paper', 'lizard'],
+    'lizard': ['paper', 'spock'],
+    'spock': ['rock', 'scissors']
 }
 
 
@@ -96,7 +98,7 @@ def determine_winner(user_choice, computer_choice):
     if user_choice == computer_choice:
         return 'draw'
 
-    if WINNING_CONDITIONS[user_choice] == computer_choice:
+    if computer_choice in WINNING_CONDITIONS[user_choice]:
         return 'win'
 
     return 'loss'
