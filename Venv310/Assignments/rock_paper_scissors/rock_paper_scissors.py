@@ -230,20 +230,20 @@ VALID_CHOICES = [
 
 # Shorthand mappings for user inputs
 CHOICES_SHORTHAND = {
-    'r': 'rock',
-    'p': 'paper',
+    'r':  'rock',
+    'p':  'paper',
     'sc': 'scissors',
-    'l': 'lizard',
+    'l':  'lizard',
     'sp': 'spock'
 }
 
 # Winning conditions for the game
 WINNING_CONDITIONS = {
-    'rock': ['scissors', 'lizard'],
-    'paper': ['rock', 'spock'],
-    'scissors': ['paper', 'lizard'],
-    'lizard': ['paper', 'spock'],
-    'spock': ['rock', 'scissors']
+    'rock':     ['scissors', 'lizard'],
+    'paper':    ['rock',     'spock'],
+    'scissors': ['paper',    'lizard'],
+    'lizard':   ['paper',    'spock'],
+    'spock':    ['rock',     'scissors']
 }
 
 # Display the title of the game based on choices
