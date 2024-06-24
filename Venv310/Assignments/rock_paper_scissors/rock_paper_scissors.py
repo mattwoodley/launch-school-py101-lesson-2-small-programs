@@ -275,9 +275,10 @@ def invalid_input(user_input, input_category):
 
     The function returns True in the following cases:
     - The user_input is not a string.
-    - The input_category is 'choice' and user_input is not in VALID_CHOICES
-      or CHOICES_SHORTHAND.
-    - The input_category is 'game_mode' and user_input is not in GAMEMODES.values().
+    - The input_category is 'choice' and user_input is not in VALID_CHOICES or
+      CHOICES_SHORTHAND.
+    - The input_category is 'game_mode' and
+      user_input is not in GAMEMODES.values().
     
     Returns False if the input is valid.
     """
