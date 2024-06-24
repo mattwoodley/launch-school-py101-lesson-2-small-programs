@@ -1,12 +1,16 @@
 {
     "welcome": "Let's play {choices}!",
+    "display_game_modes": "Game modes: {game_modes}",
+    "choose_game_mode": "Enter {best_of} to choose your game mode",
     "error_invalid": "Error: Invalid input. Please try again.",
     "choose_rps": "Choose one: {choices}",
     "user_choice": "You chose: {user_choice}",
     "computer_choice": "Computer chose: {computer_choice}",
-    "user_wins": "{user_choice} beats {computer_choice} so you win! Congratulations!",
-    "user_loses": "{computer_choice} beats {user_choice} so unfortunately you lost. Better luck next time!",
+    "user_wins": "{user_choice} beats {computer_choice} so you win this round!",
+    "user_loses": "{computer_choice} beats {user_choice} so unfortunately you lost this round.",
     "result_draw": "It's a draw! Both chose {user_choice}.",
+    "grand_winner": "You've won the game! Congratulations!",
+    "grand_loser": "You lost! Better luck next time!",
     "continue_playing": "Would you like to play again? (yes or no)",
     "thanks_for_playing": "Thank you for playing!"
 }
