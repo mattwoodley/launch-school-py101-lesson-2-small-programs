@@ -268,10 +268,18 @@ def invalid_input(user_input, input_category):
 
     Args:
         user_input (str): The user's input.
-        input_category (str): The category of input ('choice' or 'gamemode').
+        input_category (str): The category of input ('choice' or 'game_mode').
 
     Returns:
         bool: True if the input is invalid, otherwise False.
+
+    The function returns True in the following cases:
+    - The user_input is not a string.
+    - The input_category is 'choice' and user_input is not in VALID_CHOICES
+      or CHOICES_SHORTHAND.
+    - The input_category is 'game_mode' and user_input is not in GAMEMODES.values().
+    
+    Returns False if the input is valid.
     """
     if not isinstance(user_input, str):
         return True
