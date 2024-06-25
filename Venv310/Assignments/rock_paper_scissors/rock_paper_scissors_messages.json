@@ -11,6 +11,6 @@
     "result_draw": "It's a draw! Both chose {user_choice}.",
     "grand_winner": "You've won the game! Congratulations!",
     "grand_loser": "You lost! Better luck next time!",
-    "continue_playing": "Would you like to play again? (yes or no)",
+    "continue_playing": "Would you like to play again? (yes/y or no/n)",
     "thanks_for_playing": "Thank you for playing!"
 }

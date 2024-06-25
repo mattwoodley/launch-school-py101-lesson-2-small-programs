@@ -84,14 +84,9 @@ def main():
             play_one_round(scores)
             display_score(scores)
 
-        if scores['user'] == selected_game_mode:
-            display_box(MESSAGES['grand_winner'])
-        elif scores['computer'] == selected_game_mode:
-            display_box(MESSAGES['grand_loser'])
+        declare_winner(selected_game_mode, scores)
 
-        # reset scores
-        scores['user'] = 0
-        scores['computer'] = 0
+        reset_scores(scores)
 
         if not play_again():
             break
@@ -99,6 +94,36 @@ def main():
         clear_screen()
 
     prompt(MESSAGES['thanks_for_playing'])
+
+
+def declare_winner(rounds, scores):
+    """
+    Declares the winner of the game based on the number of rounds won.
+
+    Args:
+        rounds (int): The number of rounds needed to win the game.
+        scores (dict): A dictionary containing the scores for
+        'user' and 'computer'.
+
+    Displays:
+        A message indicating whether the user or computer has won the game.
+    """
+    if scores['user'] == rounds:
+        display_box(MESSAGES['grand_winner'])
+    elif scores['computer'] == rounds:
+        display_box(MESSAGES['grand_loser'])
+
+
+def reset_scores(scores):
+    """
+    Resets the scores for the user and computer to zero.
+
+    Args:
+        scores (dict): A dictionary containing the scores for
+        'user' and 'computer'.
+    """
+    scores['user'] = 0
+    scores['computer'] = 0
 
 
 def play_one_round(scores):
@@ -142,7 +167,8 @@ def get_game_mode():
     Returns:
         int: The selected game mode as an integer.
     """
-    prompt(MESSAGES['display_game_modes'].format(game_modes=DISPLAY_GAME_MODES))
+    prompt(MESSAGES['display_game_modes'].format
+           (game_modes=DISPLAY_GAME_MODES))
     prompt(MESSAGES['choose_game_mode'].format(best_of=BEST_OF))
     game_mode = input().strip().lower()
 
@@ -258,6 +284,12 @@ def play_again():
     """
     prompt(MESSAGES['continue_playing'])
     continue_playing = input().strip().lower()
+
+    while invalid_input(continue_playing, 'continue'):
+        prompt(MESSAGES['error_invalid'])
+        prompt(MESSAGES['continue_playing'])
+        continue_playing = input().strip().lower()
+
     return continue_playing in {'yes', 'y'}
 
 
@@ -291,6 +323,9 @@ def invalid_input(user_input, input_category):
 
     if input_category == 'game_mode':
         return user_input not in GAME_MODES.values()
+
+    if input_category == 'continue':
+        return user_input not in {'yes', 'y', 'no', 'n'}
 
     return False
 
